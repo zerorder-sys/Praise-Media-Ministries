@@ -2,21 +2,11 @@
 import { useEffect, useState } from 'react';
 
 export default function LiveSubCount() {
-  const [subs, setSubs] = useState("Loading...");
+  const [subs, setSubs] = useState("10K+");
 
   useEffect(() => {
-    const fetchSubs = async () => {
-      try {
-        const res = await fetch('/api/youtube');
-        const data = await res.json();
-        setSubs(data.count);
-      } catch (err) {
-        setSubs("N/A"); 
-      }
-    };
-    fetchSubs();
-    const interval = setInterval(fetchSubs, 60000); // Update every minute
-    return () => clearInterval(interval);
+    // Static deployment on Cloudflare Pages
+    setSubs("10K+");
   }, []);
 
   return (

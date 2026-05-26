@@ -2,40 +2,11 @@
 import { useEffect, useState } from 'react';
 
 export default function UpcomingEvents() {
-  const [eventData, setEventData] = useState({ loading: true, event: null });
+  const [eventData, setEventData] = useState({ loading: false, event: null });
 
   useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const res = await fetch('/api/youtube-events');
-        const data = await res.json();
-        if (data.status === 'success' && data.event) {
-          // Convert unix timestamp (seconds) to readable string
-          const date = new Date(parseInt(data.event.startTime) * 1000);
-          
-          // Format like "Oct 15 • 9:00 AM"
-          const dateString = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-          const timeString = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-          
-          setEventData({
-            loading: false,
-            event: {
-              title: data.event.title,
-              timeFormatted: `${dateString} • ${timeString}`
-            }
-          });
-        } else {
-          setEventData({ loading: false, event: null });
-        }
-      } catch (err) {
-        setEventData({ loading: false, event: null });
-      }
-    };
-
-    fetchEvents();
-    // Check every 5 minutes
-    const interval = setInterval(fetchEvents, 5 * 60 * 1000);
-    return () => clearInterval(interval);
+    // Static deployment on Cloudflare Pages
+    setEventData({ loading: false, event: null });
   }, []);
 
   return (

@@ -8,20 +8,8 @@ export default function PortfolioGallery() {
   const [activeVideo, setActiveVideo] = useState(null);
 
   useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        const res = await fetch('/api/youtube-portfolio');
-        const data = await res.json();
-        if (data.status === 'success' && data.videos.length > 0) {
-          setVideos(data.videos);
-        }
-      } catch (err) {
-        console.error('Failed to fetch portfolio videos', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchVideos();
+    // Static deployment on Cloudflare Pages
+    setLoading(false);
   }, []);
 
   return (
