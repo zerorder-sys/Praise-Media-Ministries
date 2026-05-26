@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  // Cloudflare Pages compatible configuration
+  // Don't use 'export' since we have API routes
 };
 
 export default nextConfig;
